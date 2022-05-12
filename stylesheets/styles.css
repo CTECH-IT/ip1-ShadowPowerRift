@@ -1,1 +1,16 @@
-/* Put your CSS here */
+.body {
+    background-color: bisque;
+    margin: 0;
+    align-items: center;
+}
+
+.game {
+    width: 1680px;
+    height: 720px;
+    background-color: white;
+    position: center;
+    border: solid 2px black;
+    margin: 100px auto;
+    padding: auto;
+    display: block;
+}
