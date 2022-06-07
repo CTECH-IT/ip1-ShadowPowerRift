@@ -1,33 +1,27 @@
-// Put your JavaScript here
+var character = document.getElementById("character");
+var block = document.getElementById("block");
+var counter=0;
 
-let config = {
-    type: Phaser.AUTO,
-    sence: {
-        preload: preload,
-        create: create,
-        update: update
+//This Animates Jump
+function jump(){
+    if(character.classList == "animate"){return}
+    character.classList.add("animate");
+    setTimeout(function(){
+        character.classList.remove("animate");
+    },300);
+}
+
+//This ends game when dead
+var checkDead = setInterval(function() {
+    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    if(blockLeft<20 && blockLeft>-20 && characterTop>=130){
+        block.style.animation = "none";
+        alert("Game Over. score: "+Math.floor(counter/100));
+        counter=0;
+        block.style.animation = "block 1s infinite linear";
+    }else{
+        counter++;
+        document.getElementById("scoreSpan").innerHTML = Math.floor(counter/100);
     }
-};
-
-var game = new Phaser.game(config);
-var canvas = document.querySelector("game")
-canvas = game
-
-function preload() {
-    this.load.image('sky', 'assets/sky.png');
-    this.load.image('ground', 'assets/platform.png');
-    this.load.image('star', 'assets/star.png');
-    this.load.image('bomb', 'assets/bomb.png');
-    this.load.spritesheet('dude',
-    'assets/dude.png',
-    { frameWidth: 32, frameHeight: 48 }
-    );
-
-}
-
-function create() {
-    this.add.image(1300, 720, 'sky')
-}
-
-function update() {
-}
+}, 10);
